@@ -26,7 +26,7 @@ async def tool(id_pasteleria: UUID):
         except UnicodeDecodeError:
             file_content = file_data["content"].decode('cp1252', errors='ignore')
 
-    file_path = os.path.join(folder_name, file_data["name"])
+    file_path = os.path.join(folder_name, f"{file_data['name']}.txt")
 
     with open(file_path, "w", encoding="utf-8") as file:
         file.write(file_content)
