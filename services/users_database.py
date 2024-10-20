@@ -239,7 +239,7 @@ async def create_user(id_pasteleria: UUID, username: str, hashed_password: str, 
     try:
         # Obtener el ID del rol "empleado"
         result_role = session.execute(
-            text("SELECT id FROM rol WHERE nombre = 'empleado'")
+            text("SELECT id FROM rol WHERE nombre = 'admin'")
         )
         role_row = result_role.fetchone()
 
