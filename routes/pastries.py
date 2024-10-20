@@ -3,7 +3,7 @@ from typing import Annotated, List
 from fastapi import Depends, APIRouter
 from models.user import User
 from services.pastries_database import obtener_usuarios_por_pasteleria, obtener_documentos_por_pasteleria, obtener_pasteleria_por_id
-from services.files_storage import get_all_files_from_pasteleria, get_public_image_urls_from_pasteleria
+from services.files_storage import get_all_files_from_pasteleria
 from services.authentication import get_current_active_admin_user
 from utils.exceptions import INTERNAL_SERVER_ERROR_EXCEPTION, PERMISSION_DENIED_EXCEPTION
 
@@ -19,10 +19,6 @@ async def obtener_datos_pasteleria_endpoint(
 
         if "message" in pasteleria:
             raise INTERNAL_SERVER_ERROR_EXCEPTION(pasteleria["message"])
-
-        image_urls = get_public_image_urls_from_pasteleria(id_pasteleria)
-
-        pasteleria["logos"] = image_urls
 
         return pasteleria
 

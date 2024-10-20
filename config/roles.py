@@ -3,10 +3,7 @@ import asyncio
 
 from llms.gpt_4o.llm import llm as gpt_4o_llm
 
-from tools.catalogo_doc.tool import tool as catalogo_doc
-from tools.manual_doc.tool import tool as manual_doc
-from tools.agente_inventario_db.tool import agente_inventario_db
-from tools.agente_transacciones_db.tool import agente_transacciones_db
+from tools.municipal_traffic_regulation_doc.tool import tool as municipal_traffic_regulation_doc
 
 from prompts.owner.prompt import prompt as owner_prompt
 from prompts.admin.prompt import prompt as admin_prompt
@@ -22,10 +19,7 @@ async def obtener_herramientas_propietario(id_pasteleria):
 
     # Ejecuta todas las corutinas en paralelo usando asyncio.gather
     temporal_tools = await asyncio.gather(
-        catalogo_doc(id_pasteleria),
-        manual_doc(id_pasteleria),
-        agente_inventario_db(id_pasteleria),
-        agente_transacciones_db(id_pasteleria)
+        municipal_traffic_regulation_doc(id_pasteleria),
     )
 
     # Filtra las herramientas que no son None
@@ -45,10 +39,7 @@ async def obtener_herramientas_admin(id_pasteleria):
 
     # Ejecuta todas las corutinas en paralelo usando asyncio.gather
     temporal_tools = await asyncio.gather(
-        catalogo_doc(id_pasteleria),
-        manual_doc(id_pasteleria),
-        agente_inventario_db(id_pasteleria),
-        agente_transacciones_db(id_pasteleria)
+        municipal_traffic_regulation_doc(id_pasteleria),
     )
 
     # Filtra las herramientas que no son None
@@ -68,8 +59,7 @@ async def obtener_herramientas_empleado(id_pasteleria):
 
     # Ejecuta todas las corutinas en paralelo usando asyncio.gather
     temporal_tools = await asyncio.gather(
-        catalogo_doc(id_pasteleria),
-        manual_doc(id_pasteleria)
+        municipal_traffic_regulation_doc(id_pasteleria),
     )
 
     # Filtra las herramientas que no son None
@@ -89,7 +79,7 @@ async def obtener_herramientas_cliente(id_pasteleria):
 
     # Ejecuta la corutina en paralelo usando asyncio.gather
     temporal_tools = await asyncio.gather(
-        catalogo_doc(id_pasteleria)
+        municipal_traffic_regulation_doc(id_pasteleria),
     )
 
     # Filtra las herramientas que no son None
