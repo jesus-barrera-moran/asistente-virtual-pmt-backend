@@ -15,10 +15,10 @@ async def tool(id_pasteleria: UUID):
 
     file_data = read_file(
         id_pasteleria_str,
-        "municipal_traffic_regulation"
+        "traffic_fine_doc"
     )
 
-    file_content = "No existen procesos disponibles en la regulación de tráfico municipal."
+    file_content = "No existe información disponible."
 
     if file_data["content"]:
         try:
@@ -43,8 +43,8 @@ async def tool(id_pasteleria: UUID):
 
     tool = create_retriever_tool(
         retriever,
-        "municipal_traffic_regulation_doc",
-        "Useful when you need to answer questions about traffic laws, penalties, and enforcement procedures.",
+        "traffic_fine_doc",
+        "Useful when you need to answer questions about pending unpaid traffic fines, including fine details, payment status, deadlines, and payment procedures."
     )
 
     return tool

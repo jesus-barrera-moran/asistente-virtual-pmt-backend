@@ -3,12 +3,12 @@ import asyncio
 
 from llms.gpt_4o.llm import llm as gpt_4o_llm
 
-from tools.municipal_traffic_regulation_doc.tool import tool as municipal_traffic_regulation_doc
+from tools.traffic_fine_doc.tool import tool as traffic_fine_doc
 
 from prompts.owner.prompt import prompt as owner_prompt
-from prompts.admin.prompt import prompt as admin_prompt
-from prompts.employee.prompt import prompt as employee_prompt
-from prompts.client.prompt import prompt as client_prompt
+# from prompts.admin.prompt import prompt as admin_prompt
+# from prompts.employee.prompt import prompt as employee_prompt
+# from prompts.client.prompt import prompt as client_prompt
 
 # Función asíncrona para obtener las herramientas de cada rol
 async def obtener_herramientas_propietario(id_pasteleria):
@@ -19,7 +19,7 @@ async def obtener_herramientas_propietario(id_pasteleria):
 
     # Ejecuta todas las corutinas en paralelo usando asyncio.gather
     temporal_tools = await asyncio.gather(
-        municipal_traffic_regulation_doc(id_pasteleria),
+        traffic_fine_doc(id_pasteleria),
     )
 
     # Filtra las herramientas que no son None
@@ -39,7 +39,7 @@ async def obtener_herramientas_admin(id_pasteleria):
 
     # Ejecuta todas las corutinas en paralelo usando asyncio.gather
     temporal_tools = await asyncio.gather(
-        municipal_traffic_regulation_doc(id_pasteleria),
+        traffic_fine_doc(id_pasteleria),
     )
 
     # Filtra las herramientas que no son None
@@ -59,7 +59,7 @@ async def obtener_herramientas_empleado(id_pasteleria):
 
     # Ejecuta todas las corutinas en paralelo usando asyncio.gather
     temporal_tools = await asyncio.gather(
-        municipal_traffic_regulation_doc(id_pasteleria),
+        traffic_fine_doc(id_pasteleria),
     )
 
     # Filtra las herramientas que no son None
@@ -79,7 +79,7 @@ async def obtener_herramientas_cliente(id_pasteleria):
 
     # Ejecuta la corutina en paralelo usando asyncio.gather
     temporal_tools = await asyncio.gather(
-        municipal_traffic_regulation_doc(id_pasteleria),
+        traffic_fine_doc(id_pasteleria),
     )
 
     # Filtra las herramientas que no son None
@@ -100,17 +100,17 @@ role_configurations = {
     },
     "admin": {
         "tools": obtener_herramientas_admin,
-        "prompt": admin_prompt,
+        "prompt": owner_prompt,
         "llm": gpt_4o_llm,
     },
     "empleado": {
         "tools": obtener_herramientas_empleado,
-        "prompt": employee_prompt,
+        "prompt": owner_prompt,
         "llm": gpt_4o_llm,
     },
     "cliente": {
         "tools": obtener_herramientas_cliente,
-        "prompt": client_prompt,
+        "prompt": owner_prompt,
         "llm": gpt_4o_llm,
     },
 }
